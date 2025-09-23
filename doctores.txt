@@ -1,0 +1,6 @@
+Natalia|Traumatología|5|Femenino|Clinica Norte
+Arturo|Medicina General|10|Masculino|Centro Sur
+Tomas|Neurología|7|Masculino|Clínica Vida
+Ricardo|Cardiología|3|Masculino|Hospital Central
+Susana|Pediatría|15|Femenino|Clínica Vida
+Mario|Cardiología|6|Masculino|Hospital Central
