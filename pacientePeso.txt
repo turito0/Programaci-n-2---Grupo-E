@@ -1,0 +1,6 @@
+Arturo|17-09-2005|20|Masculino|Orh+|Privado|Clinica Norte|76.4
+Susana|24-02-1980|45|Femenino|Orh+|Privado|Clinica Norte|80.2
+Ricardo|19-11-2007|17|Masculino|Arh-|Privado|Centro Sur|74.5
+Luis|11-09-1969|56|Masculino|Arh+|Publico|Clinica Norte|94.3
+Natalia|26-01-2007|18|Femenino|Arh+|Privado|Centro Sur|61.3
+Silvana|11-11-2000|24|Femenino|ABrh-|Ninguno|Hospital Central|84.5
