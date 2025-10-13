@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+ <meta charset="utf-8" />
+ <title>Formulario ejemplo</title>
+ <style>
+   body { font-family: serif; margin: 20px; }
+   label { font-size: 20px; display:block; margin-top: 12px; }
+   textarea { width: 80%; height: 140px; font-family: monospace; font-size: 16px; }
+   .small { font-size: 18px; }
+ </style>
+</head>
+<body>
+ <h1>Completar:</h1>
+ <form action="{{ url_for('submit') }}" method="post" enctype="multipart/form-data">
+   <!-- Color -->
+   <label>Elija un color:
+     <input type="color" name="color" value="#000000">
+   </label>
+   <!-- Texto grande -->
+   <label>Escriba un mensaje</label>
+   <textarea name="mensaje" placeholder="Por favor, escriba aquí"></textarea>
+   <!-- Select -->
+   <label class="small">Elija una opción</label>
+   <select name="lenguaje">
+     <option value="Java" selected>Java</option>
+     <option value="Python">Python</option>
+     <option value="C++">C++</option>
+     <option value="C#">C#</option>
+   </select>
+   <!-- Checkboxes -->
+   <div>
+     <label><input type="checkbox" name="curso" value="1ro"> 1ro.</label>
+     <label><input type="checkbox" name="curso" value="2do"> 2do.</label>
+     <label><input type="checkbox" name="curso" value="3ro"> 3ro.</label>
+   </div>
+   <p>Rellene las opciones siguientes:</p>
+   <!-- Fecha -->
+   <label>Elija una fecha:
+     <input type="date" name="fecha">
+   </label>
+   <!-- Fichero -->
+   <label>Elija un fichero:
+     <input type="file" name="fichero">
+   </label>
+   <!-- Select múltiple (lista) -->
+   <label>
+     Lista (mantenga Ctrl/Cmd para múltiples):
+     <select name="lista_multi" multiple size="4">
+       <option value="1ro">1ro</option>
+       <option value="2do">2do</option>
+       <option value="3ro">3ro</option>
+       <option value="4to">4to</option>
+     </select>
+   </label>
+   <!-- Botones -->
+   <p>
+     <button type="submit">Enviar</button>
+     <button type="reset">Resetear</button>
+   </p>
+ </form>
+</body>
+</html>
