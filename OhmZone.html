@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OhmZone - Explorando la Electrónica Moderna</title>
+    <style>
+        /* Variables de colores y estilos */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #7f8c8d;
+            --success: #2ecc71;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--accent);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+        }
+        
+        .btn-accent:hover {
+            background-color: #c0392b;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        /* Header y navegación */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+            padding: 180px 0 100px;
+            margin-top: 70px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Componentes */
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .component {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            background: white;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .component:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .component-image {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+        
+        .component-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        /* Tabla de precios */
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: var(--shadow);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .price-table th, .price-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .price-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .price-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .price-table tr:hover {
+            background-color: #e9ecef;
+        }
+        
+        /* Sección de leyes */
+        .law-card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        .law-formula {
+            font-size: 1.5rem;
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Herramientas */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .tool {
+            text-align: center;
+            padding: 25px;
+            border-radius: 8px;
+            background: white;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .tool:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tool-image {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+        
+        .tool-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        /* Sección de circuitos */
+        .circuit-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .circuit-type {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+        
+        .circuit-type h3 {
+            display: flex;
+            align-items: center;
+        }
+        
+        .circuit-type h3::before {
+            content: "⚡";
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        /* Diseño y simulación */
+        .design-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .design-steps::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            z-index: 1;
+        }
+        
+        .step {
+            background: white;
+            padding: 20px;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .tool-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .footer-made {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .nav-links {
+                display: flex;
+                position: static;
+                top: auto;
+                left: auto;
+                width: 100%;
+                background-color: transparent;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px 0;
+                transform: none;
+                opacity: 1;
+                box-shadow: none;
+            }
+            
+            .nav-links li {
+                margin: 8px 0;
+                margin-left: 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .design-steps {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+            
+            .design-steps::before {
+                display: none;
+            }
+            
+            .step {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header y Navegación -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">OhmZone</div>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#introduccion">Introducción</a></li>
+                    <li><a href="#componentes-basicos">Componentes Básicos</a></li>
+                    <li><a href="#componentes-avanzados">Componentes Avanzados</a></li>
+                    <li><a href="#herramientas">Herramientas</a></li>
+                    <li><a href="#circuitos">Tipos de Circuitos</a></li>
+                    <li><a href="#diseno">Diseño y Simulación</a></li>
+                    <li><a href="#leyes">Leyes Fundamentales</a></li>
+                    <li><a href="#precios">Inventario y Precios</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="container">
+            <h1>OhmZone</h1>
+            <p>Una exploración profunda de los bloques de construcción esenciales que impulsan la tecnología moderna, desde la resistencia más simple hasta los sistemas embebidos más complejos.</p>
+            <a href="#introduccion" class="btn">Empezar a Explorar</a>
+        </div>
+    </section>
+
+    <!-- Introducción a la Electrónica -->
+    <section id="introduccion">
+        <div class="container">
+            <h2>Introducción a la Electrónica</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>¿Qué es la Electrónica?</h3>
+                    <p>Es la rama de la física y la ingeniería que estudia y aplica el control del flujo de electrones para controlar la electricidad y procesar información. Es el corazón de todos los dispositivos inteligentes.</p>
+                </div>
+                <div class="card">
+                    <h3>Importancia en la Vida Diaria</h3>
+                    <p>La electrónica es indispensable en el mundo actual. Está presente en nuestros teléfonos, vehículos, equipos médicos y sistemas de comunicación, moldeando nuestra interacción con la tecnología moderna.</p>
+                </div>
+                <div class="card">
+                    <h3>Creando Dispositivos</h3>
+                    <p>La sinergia entre componentes básicos (resistores, capacitores), herramientas de precisión (multímetros, osciloscopios) y los tipos de circuitos define cómo se diseñan y construyen los dispositivos electrónicos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Componentes Electrónicos Básicos -->
+    <section id="componentes-basicos">
+        <div class="container">
+            <h2>Componentes Electrónicos Básicos</h2>
+            <p>Estos son los fundamentos sobre los cuales se construye casi cualquier sistema electrónico, desde el más sencillo hasta el más complejo.</p>
+            
+            <div class="component-grid">
+                <div class="component">
+                    <div class="component-image">
+                        <img src="c:\Users\DELL\Documents\Univalle sem.2\Pagina Web\Fotos\WhatsApp Image 2025-10-18 at 11.06.56 AM.jpeg" alt="Resistencias">
+                    </div>
+                    <h3>Resistencias</h3>
+                    <p>Su función es oponerse al flujo de corriente eléctrica, protegiendo otros componentes y regulando niveles de voltaje. Vienen en diversos tipos y potencias.</p>
+                </div>
+                <div class="component">
+                    <div class="component-image">
+                        <img src="c:\Users\DELL\Documents\Univalle sem.2\Pagina Web\Fotos\WhatsApp Image 2025-10-18 at 12.13.49 PM.jpeg" alt="Condensadores">
+                    </div>
+                    <h3>Condensadores</h3>
+                    <p>Almacenan energía en un campo eléctrico. Se utilizan para filtrar ruido, acoplar señales y temporizar circuitos. Se miden en Faradios.</p>
+                </div>
+                <div class="component">
+                    <div class="component-image">
+                        <img src="c:\Users\DELL\Documents\Univalle sem.2\Pagina Web\Fotos\images.jpg" alt="Diodos y LEDs">
+                    </div>
+                    <h3>Diodos y LEDs</h3>
+                    <p>Permiten que la corriente fluya en una sola dirección. Los LEDs (Diodos Emisores de Luz) son diodos especializados que emiten luz cuando se polarizan correctamente, siendo vitales en iluminación y señalización.</p>
+                </div>
+                <div class="component">
+                    <div class="component-image">
+                        <img src="c:\Users\DELL\Documents\Univalle sem.2\Pagina Web\Fotos\WhatsApp Image 2025-10-18 at 12.14.15 PM.jpeg" alt="Transistores">
+                    </div>
+                    <h3>Transistores</h3>
+                    <p>Componentes semiconductores cruciales. Actúan como interruptores electrónicos (conmutación) o como amplificadores de señal. Tipos comunes incluyen BJT y MOSFET.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Circuitos Integrados (CI)</h3>
+                <p>Como microcontroladores o amplificadores operacionales, agrupan miles de estos componentes en un solo encapsulado, revolucionando el diseño electrónico.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Componentes Electrónicos Avanzados y Especializados -->
+    <section id="componentes-avanzados">
+        <div class="container">
+            <h2>Componentes Electrónicos Avanzados y Especializados</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <div class="component-image">
+                        <img src="c:\Users\DELL\Documents\Univalle sem.2\Pagina Web\Fotos\sensorInt.jpg" alt="Sensores Inteligentes">
+                    </div>
+                    <h3>Sensores Inteligentes</h3>
+                    <p>Dispositivos que detectan y responden a algún tipo de entrada física del entorno (luz, temperatura, proximidad, etc.). Convierten fenómenos físicos en señales eléctricas.</p>
+                </div>
+                <div class="card">
+                    <div class="component-image">
+                        <img src="c:\Users\DELL\Documents\Univalle sem.2\Pagina Web\Fotos\actuadores.jpg" alt="Actuadores">
+                    </div>
+                    <h3>Actuadores</h3>
+                    <p>Dispositivos de salida que convierten una señal eléctrica en movimiento físico o acción (motores, solenoides, relés). Son la interfaz entre la electrónica y el mundo físico.</p>
+                </div>
+                <div class="card">
+                    <div class="component-image">
+                        <img src="c:\Users\DELL\Documents\Univalle sem.2\Pagina Web\Fotos\microCont.jpg" alt="Microcontroladores">
+                    </div>
+                    <h3>Microcontroladores</h3>
+                    <p>Pequeñas computadoras en un solo chip (como Arduino o Raspberry Pi Pico), diseñadas para controlar funciones específicas en sistemas embebidos.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Activos vs. Pasivos</h3>
+                <p>Los componentes pasivos (resistencias, condensadores) no pueden amplificar o controlar el flujo de corriente. Los activos (transistores, diodos, CIs) sí lo hacen, inyectando potencia o controlando la señal.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Herramientas Electrónicas para Diseño y Montaje -->
+    <section id="herramientas">
+        <div class="container">
+            <h2>Herramientas Electrónicas para Diseño y Montaje</h2>
+            <p>La medición precisa y el montaje adecuado son esenciales para el éxito en cualquier proyecto electrónico. Estas herramientas son imprescindibles en el laboratorio.</p>
+            
+            <div class="tool-grid">
+                <div class="tool">
+                    <div class="tool-image">
+                        <img src="c:\Users\DELL\Documents\Univalle sem.2\Pagina Web\Fotos\WhatsApp Image 2025-10-18 at 11.05.21 AM.jpeg" alt="Multímetro Digital">
+                    </div>
+                    <h3>Multímetro Digital</h3>
+                    <p>Herramientas universal para medir magnitudes eléctricas como voltaje (V), corriente (A) y resistencia (Ω). Vital para el diagnóstico y la solución de problemas.</p>
+                </div>
+                <div class="tool">
+                    <div class="tool-image">
+                        <img src="c:\Users\DELL\Documents\Univalle sem.2\Pagina Web\Fotos\WhatsApp Image 2025-10-18 at 12.16.55 PM.jpeg" alt="Fuente de Alimentación">
+                    </div>
+                    <h3>Fuente de Alimentación</h3>
+                    <p>Asegura un suministro de voltaje y corriente limpio y estable, regulado a niveles específicos, crucial para la prueba segura de prototipos sin riesgo de daño.</p>
+                </div>
+                <div class="tool">
+                    <div class="tool-image">
+                        <img src="c:\Users\DELL\Documents\Univalle sem.2\Pagina Web\Fotos\WhatsApp Image 2025-10-18 at 12.23.21 PM.jpeg" alt="Osciloscopio">
+                    </div>
+                    <h3>Osciloscopio</h3>
+                    <p>Permite visualizar la forma de onda de las señales eléctricas a lo largo del tiempo. Es fundamental para analizar el comportamiento dinámico de los circuitos, como frecuencias y ruido.</p>
+                </div>
+                <div class="tool">
+                    <div class="tool-image">
+                        <img src="c:\Users\DELL\Documents\Univalle sem.2\Pagina Web\Fotos\WhatsApp Image 2025-10-18 at 12.24.23 PM.jpeg" alt="Estación de Soldadura">
+                    </div>
+                    <h3>Estación de Soldadura</h3>
+                    <p>Necesaria para unir componentes de forma permanente. Una buena estación ofrece control de temperatura y puntas intercambiables para soldadura de precisión.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tipos de Circuitos Electrónicos -->
+    <section id="circuitos">
+        <div class="container">
+            <h2>Tipos de Circuitos Electrónicos</h2>
+            <p>La forma en que se conectan los componentes define las características operacionales y la complejidad del circuito.</p>
+            
+            <div class="circuit-types">
+                <div class="circuit-type">
+                    <h3>Circuitos en Serie</h3>
+                    <p>Los componentes están conectados secuencialmente; la corriente es la misma para todos. Si un componente falla, todo el circuito se interrumpe.</p>
+                </div>
+                <div class="circuit-type">
+                    <h3>Circuitos en Paralelo</h3>
+                    <p>La corriente se divide entre las ramas. El voltaje es el mismo para todos los componentes. La falla de uno no afecta el funcionamiento de los demás.</p>
+                </div>
+                <div class="circuit-type">
+                    <h3>Circuitos Mixtos</h3>
+                    <p>Combinan secciones en serie y en paralelo. Son la base de la mayoría de los sistemas electrónicos complejos, equilibrando control y redundancia.</p>
+                </div>
+            </div>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Circuitos Analógicos</h3>
+                    <p>Manejan señales continuas (voz, temperatura). Son fundamentales para el procesamiento de señales del mundo real.</p>
+                </div>
+                <div class="card">
+                    <h3>Circuitos Digitales</h3>
+                    <p>Operan con estados discretos (0 y 1, o encendido/apagado), fundamentales para la computación y la lógica binaria.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diseño y Simulación de Circuitos Electrónicos -->
+    <section id="diseno">
+        <div class="container">
+            <h2>Diseño y Simulación de Circuitos Electrónicos</h2>
+            <p>Antes de construir físicamente, la simulación es una fase crucial para validar el funcionamiento y optimizar el rendimiento de un diseño.</p>
+            
+            <div class="design-steps">
+                <div class="step">Esquema</div>
+                <div class="step">Simulación</div>
+                <div class="step">Fabricación</div>
+                <div class="step">Diseño PCB</div>
+            </div>
+            
+            <div class="card">
+                <p>Un simulador de circuitos modela el comportamiento de un diseño bajo diversas condiciones, permitiendo a los ingenieros detectar errores, optimizar valores de componentes y reducir costos de prototipado físico.</p>
+            </div>
+            
+            <h3>Herramientas Clave</h3>
+            <div class="tools-grid">
+                <div class="tool-item">
+                    <h4>EasyEDA</h4>
+                    <p>Herramienta online gratuita para diseño de PCB y esquemáticos.</p>
+                </div>
+                <div class="tool-item">
+                    <h4>KiCad</h4>
+                    <p>Suite profesional y de código abierto para diseño de circuitos.</p>
+                </div>
+                <div class="tool-item">
+                    <h4>Wokwi / CircuitLab</h4>
+                    <p>Plataformas online para simulación rápida de microcontroladores y circuitos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leyes Fundamentales de la Electrónica -->
+    <section id="leyes">
+        <div class="container">
+            <h2>Leyes Fundamentales de la Electrónica</h2>
+            
+            <div class="law-card">
+                <h3>Ley de Ohm</h3>
+                <p>Establece la relación fundamental entre voltaje (V), corriente (I) y resistencia (R). La fórmula es esencial para dimensionar componentes y garantizar que el circuito opere dentro de límites seguros. Es la base del análisis de circuitos simples.</p>
+                <div class="law-formula">V = I · R</div>
+            </div>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Ley de Corrientes (LCK)</h3>
+                    <p>La suma de las corrientes que entran a un nodo es igual a la suma de las corrientes que salen.</p>
+                </div>
+                <div class="card">
+                    <h3>Ley de Voltajes (LVK)</h3>
+                    <p>La suma algebraica de todas las caídas de voltaje en una malla cerrada es igual a cero.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inventario y Precios Estimados -->
+    <section id="precios">
+        <div class="container">
+            <h2>Inventario y Precios Estimados de Componentes y Herramientas</h2>
+            <p>Una referencia rápida de precios estimados para los componentes y herramientas discutidos, basada en el mercado estándar (precios de referencia en USD).</p>
+            
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th>Elemento</th>
+                        <th>Descripción</th>
+                        <th>Precio Estimado (Bs)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Resistencia (Pack 100)</td>
+                        <td>Surtido básico de valores (1/4W)</td>
+                        <td>20.70 - 34.00 Bs</td>
+                    </tr>
+                    <tr>
+                        <td>Condensador Electrolítico (Pack)</td>
+                        <td>Surtido de valores comunes</td>
+                        <td>34.50 - 69.00 Bs</td>
+                    </tr>
+                    <tr>
+                        <td>Diodo LED (Pack 100)</td>
+                        <td>Colores y tamaños variados</td>
+                        <td>13.80 - 27.60 Bs</td>
+                    </tr>
+                    <tr>
+                        <td>Transistor BJT (Pack)</td>
+                        <td>Modelos de propósito general (ej. 2N3904)</td>
+                        <td>20.70 - 41.40 Bs</td>
+                    </tr>
+                    <tr>
+                        <td>Multímetro Digital</td>
+                        <td>Modelo básico a medio alcance</td>
+                        <td>172.50 - 483.00 Bs</td>
+                    </tr>
+                    <tr>
+                        <td>Estación de Soldadura</td>
+                        <td>Modelo con control de temperatura</td>
+                        <td>276.00 - 828.00 Bs</td>
+                    </tr>
+                    <tr>
+                        <td>Arduino Uno</td>
+                        <td>Microcontrolador de referencia</td>
+                        <td>103.50 - 172.50 Bs</td>
+                    </tr>
+                    <tr>
+                        <td>Osciloscopio Digital (2 Canales)</td>
+                        <td>Modelo de entrada (Benchtop)</td>
+                        <td>2070.00 - 4140.00 Bs</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">OhmZone</div>
+                <p>Explorando los fundamentos de la electrónica moderna</p>
+                <div class="footer-made">Hecho por Aaron .P & Arturo .I</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling para navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
